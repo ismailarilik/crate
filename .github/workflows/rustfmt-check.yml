@@ -1,11 +1,17 @@
-on: push
 name: rustfmt check
 
+on:
+    push:
+    pull_request:
+
 jobs:
-  clippy_check:
+  rustfmt_check:
+    name: rustfmt check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Update Rust toolchain
+        run: rustup update
       - name: Run rustfmt
         run: cargo fmt --all -- --check
 
